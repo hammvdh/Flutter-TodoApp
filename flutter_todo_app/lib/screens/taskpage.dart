@@ -8,23 +8,26 @@ import 'package:flutter_todo_app/widgets.dart';
 class Taskpage extends StatefulWidget {
 
   final Task task;
-  Taskpage({@required this.task});
+  Taskpage({@required this.task}); // Constructor
 
   @override
   _TaskpageState createState() => _TaskpageState();
 }
 
 class _TaskpageState extends State<Taskpage> {
-  DatabaseHelper _dbHelper = DatabaseHelper();
+  DatabaseHelper _dbHelper = DatabaseHelper(); // dbHelper variable to access methods from the database helper dart file
 
+  // Variables used within file
   int _taskId = 0;
   String _taskTitle = "";
   String _taskDescription = "";
 
+  // Focus node variables used to move focus once user locks in value for title, description or todo item
   FocusNode _titleFocus;
   FocusNode _descriptionFocus;
   FocusNode _todoFocus;
 
+  // boolean variable to set state of visibility
   bool contentVisible = false;
 
   @override
@@ -36,6 +39,7 @@ class _TaskpageState extends State<Taskpage> {
       _taskDescription = widget.task.description;
     }
 
+    // initializing focus nodes
     _titleFocus = FocusNode();
     _descriptionFocus = FocusNode();
     _todoFocus = FocusNode();
@@ -69,7 +73,7 @@ class _TaskpageState extends State<Taskpage> {
                     ),
                     child: Row(
                       children: [
-                        InkWell(
+                        InkWell( // adds an effect when back button clicked
                           onTap: (){
                             Navigator.pop(context);
                           },
@@ -77,7 +81,7 @@ class _TaskpageState extends State<Taskpage> {
                             padding: const EdgeInsets.all(24),
                             child: Image(
                               image:AssetImage(
-                                'assets/images/back_arrow_icon.png'
+                                'assets/images/back_arrow_icon.png' // back icon
                               ),
                             ),
                           ),
@@ -97,20 +101,20 @@ class _TaskpageState extends State<Taskpage> {
                                     contentVisible=true;
                                     _taskTitle = value;
                                   });
-                                  print("New task has been created! : $_taskId ");
+                                  print("New task has been created! : $_taskId "); // to notify on console when new task created
                                 }else{
                                   _dbHelper.updateTaskTitle(_taskId, value);
-                                  print("Task Updated!");
+                                  print("Task Updated!"); // to notify on console when task updated
                                 }
-                                _descriptionFocus.requestFocus();
+                                _descriptionFocus.requestFocus(); // to move focus to description node
                               }
                             },
                             controller: TextEditingController()..text = _taskTitle,
                             decoration: InputDecoration(
-                              hintText: "Enter Task Title",
+                              hintText: "Enter Task Title", // temporary text
                               border:InputBorder.none,
                             ),
-                            style: TextStyle(
+                            style: TextStyle( // text style
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
                               color:Color(0xFF211551),
@@ -204,7 +208,7 @@ class _TaskpageState extends State<Taskpage> {
                                 ),
                                 child: Image(
                                     image:AssetImage(
-                                        'assets/images/check_icon.png'
+                                        'assets/images/check_icon.png' // to-do icon
                                     )
                                 ),
                               ),
@@ -265,7 +269,7 @@ class _TaskpageState extends State<Taskpage> {
                       ),
                       child: Image(
                           image:AssetImage(
-                              'assets/images/delete_icon.png'
+                              'assets/images/delete_icon.png' // delete icon
                           )
                       ),
                     ),

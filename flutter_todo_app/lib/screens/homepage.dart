@@ -11,7 +11,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
 
-  DatabaseHelper _dbHelper = DatabaseHelper();
+  DatabaseHelper _dbHelper = DatabaseHelper(); // dbHelper variable to access methods from the database helper dart file
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,10 @@ class _HomepageState extends State<Homepage> {
             padding: EdgeInsets.symmetric(
                 horizontal: 24.0,
             ),
-            color: Color(0xFFF6F6F6),
+            color: Color(0xFFF6F6F6), // App Background Color
             child: Stack(
               children: [
+                // Column which would contain all the tasks using the Task Card Widget
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -74,6 +75,8 @@ class _HomepageState extends State<Homepage> {
                   ],
 
                 ),
+
+                // Add a Task Button
                 Positioned(
                   bottom:24,
                   right: 0,
@@ -82,17 +85,17 @@ class _HomepageState extends State<Homepage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Taskpage(task: null)
+                              builder: (context) => Taskpage(task: null) // Navigates to Task Page
                           ),
                       ).then((value){
-                        setState(() {});
+                        setState(() {}); // Setting and Refreshing State
                       });
                     },
                     child: Container(
                       width: 60,
                       height: 60,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
+                        gradient: LinearGradient( // Linear Gradient on Add Task button
                           colors:[Color(0xFF7349FE),Color(0xFF643FDB)],
                           begin: Alignment(0,-1),
                           end:Alignment(0,1)
@@ -101,7 +104,7 @@ class _HomepageState extends State<Homepage> {
                       ),
                       child: Image(
                         image:AssetImage(
-                          'assets/images/add_icon.png'
+                          'assets/images/add_icon.png' // Add icon
                         )
                       ),
                     ),
